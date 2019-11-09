@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Request Book</title>
+    <style>
+    .main1{
+
+			float: right;
+
+			margin-top: 10px;
+			 height: 300px;
+			 width: 500px;
+			 margin-right: 25px;
+			text-align: left;
+		     }
+</style>
+</head>
+
+<body background="{% static 'library/img/wonder1.jpg' %}" style="background-repeat: no-repeat; background-size: cover; ">
+<div class="bg" ></div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">NITC</a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+       <li class="nav-item">
+        <img src="{% static 'library/img/logonitc.jpg' %} "style="width:40px; hieght:40px;">
+      </li>
+      <li class="nav-item dropdown">
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <li class="nav-item">
+         <mark class="nav-link enabled" href="#" tabindex="2" aria-disabled="false" style="background-color: #80ced6;">Welcome {{ user.username }} In NITC Library</mark>
+      </li>
+    </ul>
+
+    <form class="form-inline my-2 my-lg-0" >
+         {% csrf_token %}
+        <a href="{% url 'index' %}" class="btn btn-outline-success my-2 my-sm-0"  style="margin:5px;" >Home</a><br>
+        <a href="{% url 'wel' %}" class="btn btn-outline-success my-2 my-sm-0"  style="margin:5px;">Dashboard</a>
+        <a href="{% url 'logout' %}" class="btn btn-outline-success my-2 my-sm-0"  style="margin:5px;">Logout</a>
+    </form>
+
+  </div>
+</nav>
+
+<br>
+ {% if note %}
+ <div class="alert alert-primary" role="alert">
+  {{note}}
+</div>
+{% endif %}
+{% if note1 %}
+<div class="p-3 mb-2 bg-danger text-white" role="alert">
+    Not Found This Type of Book Try Other....!!!!!
+</div>
+{% endif %}
+</div><br><br><br>
+<div class="main1">
+		<h2 style="color: red"><marquee>Important Notice</marquee></h2>
+			<ul style="font-size:20px; color:white">
+  {% if objp %}
+                {% for i in objp %}
+            <form method="POST" action="//">
+                <div class="alert alert-primary" role="alert">
+                   <a href="#" value="{{i.content}}" onclick="fun1('{{i.content}}')" class="alert-link">{{i.title}}</a>&nbsp;&nbsp;&nbsp;Poted date:{{i.date_posted}}
+                    <p>{{i.content}}</p>
+                 </div>
+            </form>
+                {% endfor %}
+</ul>
+    {% endif %}
+
+
+
+
+</div>
+<h3><label for="exampleInputEmail1" style="color:pink">&nbsp;&nbsp;Post Request</label></h3>
+<form action="/requestbook/" method="POST">
+    {% csrf_token %}
+    <div class="form-group col-lg-4">
+        <label for="exampleInputEmail1" style="color:blue;size:20px;font;"><font size="5">Title</font></label>
+        <input type="text" class="form-control" name="title" id="exampleInputEmail1" placeholder="Title" rows="3" style="background-color:Lavender;color:black;">
+</div>
+    <div class="form-group col-lg-4">
+        <label for="exampleInputEmail1" style="color:blue;"><font size="5">Subject</font></label>
+     <textarea class="form-control" id="exampleFormControlTextarea1" rows="6" name="content" style="background-color:Lavender;color:black;"></textarea>
+</div>
+    <input type="text" name="uname" value="{{user.username}}" hidden>
+    &nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-primary">Post</button>
+    &nbsp;&nbsp;&nbsp;<a href="{% url 'wel' %}" class="btn btn-danger">Cancel</a>
+</form>
+
+
+
+
+</body>
+</html>
+
+
+
+
+

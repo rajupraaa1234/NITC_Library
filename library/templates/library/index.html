@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>NITC Library</title>
+  {% load static %}
+
+  <!-- Bootstrap -->
+  <link href="{% static 'library/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'library/css/font-awesome.min.css' %}">
+  <link rel="stylesheet" href="{% static 'library/css/animate.css' %}">
+  <link href="{% static 'library/css/animate.min.css' %}" rel="stylesheet">
+  <link href="{% static 'library/css/style.css' %}" rel="stylesheet" />
+  <!-- =======================================================
+    Theme Name: Day
+    Theme URL: https://bootstrapmade.com/day-multipurpose-html-template-for-free/
+    Author: BootstrapMade
+    Author URL: https://bootstrapmade.com
+  ======================================================= -->
+</head>
+
+<body>
+  <header id="header">
+    <nav class="navbar navbar-default navbar-static-top" role="banner">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+          <div class="navbar-brand">
+            <a href="{% url 'index' %}"><h1>NITC</h1></a>
+          </div>
+          <div class="navbar-brand">
+
+             <img src="{% static 'library/img/logonitc.jpg' %} "style="width:50px; hieght:50px;">
+          </div>
+          {% if messages %}
+          {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+          </div>
+          {% endfor %}
+          {% endif %}
+
+        </div>
+        <div class="navbar-collapse collapse">
+          <div class="menu">
+            <ul class="nav nav-tabs" role="tablist">
+
+              {% if request.user.is_authenticated %}
+              <li role="presentation"><a href="{% url 'about' %}">About Us</a></li>
+              <li role="presentation"><a href="{% url 'gallery' %}">Gallery</a></li>
+              <li role="presentation"><a href="{% url 'wel' %}">Dashboard</a></li>
+               <li role="presentation"><a href="{% url 'profile' %}">Profile</a></li>
+              <li role="presentation"><a href="{% url 'logout' %}">Logout</a></li>
+              {% else %}
+              <li role="presentation"><a href="{% url 'about' %}">About Us</a></li>
+              <li role="presentation"><a href="{% url 'gallery' %}">Gallery</a></li>
+               <li role="presentation"><a href="{% url 'adminlogin' %}">Admin Login</a></li>
+              <li role="presentation"><a href="{% url 'login' %}">User Login</a></li>
+              <li role="presentation"><a href="{% url 'register' %}">Register</a></li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!--/.container-->
+    </nav>
+    <!--/nav-->
+  </header>
+  <!--/header-->
+
+  <div class="slider">
+    <div id="about-slider">
+      <div id="carousel-slider" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators visible-xs">
+          <li data-target="#carousel-slider" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel-slider" data-slide-to="1"></li>
+          <li data-target="#carousel-slider" data-slide-to="2"></li>
+        </ol>
+
+        <div class="carousel-inner">
+          <div class="item active">
+            <img src="{% static 'library/new4.jpeg' %}" class="img-responsive" alt="">
+            <div class="carousel-caption">
+              <div class="wow fadeInUp" data-wow-offset="0" data-wow-delay="0.3s">
+                <h2><span>NIT CALICUT LIBRARY</span></h2>
+              </div>
+              <div class="col-md-10 col-md-offset-1">
+                <div class="wow fadeInUp" data-wow-offset="0" data-wow-delay="0.6s">
+                  <p>Join with our Library Management System</p>
+                </div>
+              </div>
+              <div class="wow fadeInUp" data-wow-offset="0" data-wow-delay="0.9s">
+                <form class="form-inline">
+                  <div class="form-group">
+                    <a href="http://www.nitc.ac.in/" type="livedemo" name="Live Demo" class="btn btn-primary btn-lg" required="required">Live Demo</a>
+                  </div>
+                  <div class="form-group">
+                    <a href="{% url 'register' %}" type="getnow" name="Get Now" class="btn btn-primary btn-lg" required="required">Get Now</a>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div class="item">
+            <img src="{% static 'library/new2.jpg' %}" class="img-responsive" alt="">
+            <div class="carousel-caption">
+              <div class="wow fadeInUp" data-wow-offset="0" data-wow-delay="1.0s">
+                <h2>NIT CALICUT LIBRARY</h2>
+              </div>
+              <div class="col-md-10 col-md-offset-1">
+                <div class="wow fadeInUp" data-wow-offset="0" data-wow-delay="0.6s">
+                  <p>Join with our Library Management System</p>
+                </div>
+              </div>
+              <div class="wow fadeInUp" data-wow-offset="0" data-wow-delay="1.6s">
+                <form class="form-inline">
+                  <div class="form-group">
+                    <a href="http://www.nitc.ac.in/" type="livedemo" name="purchase" class="btn btn-primary btn-lg" required="required">Live Demo</a>
+                  </div>
+                  <div class="form-group">
+                    <a href="{% url 'register' %}" type="getnow" name="subscribe" class="btn btn-primary btn-lg" required="required">Get Now</a>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <img src="{% static 'library/img/wonder1.jpg' %}" class="img-responsive" alt="">
+            <div class="carousel-caption">
+              <div class="wow fadeInUp" data-wow-offset="0" data-wow-delay="0.3s">
+                <h2>NIT CALICUT LIBRARY</h2>
+              </div>
+              <div class="col-md-10 col-md-offset-1">
+                <div class="wow fadeInUp" data-wow-offset="0" data-wow-delay="0.6s">
+                  <p>Join with our Library Management System</p>
+                </div>
+              </div>
+              <div class="wow fadeInUp" data-wow-offset="0" data-wow-delay="0.9s">
+                <form class="form-inline">
+                  <div class="form-group">
+                    <a href="http://www.nitc.ac.in/" type="livedemo" name="purchase" class="btn btn-primary btn-lg" required="required">Live Demo</a>
+                  </div>
+                  <div class="form-group">
+                    <a href="{% url 'register' %}" type="getnow" name="subscribe" class="btn btn-primary btn-lg" required="required">Get Now</a>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a class="left carousel-control hidden-xs" href="#carousel-slider" data-slide="prev">
+					<i class="fa fa-angle-left"></i>
+				</a>
+
+        <a class=" right carousel-control hidden-xs" href="#carousel-slider" data-slide="next">
+					<i class="fa fa-angle-right"></i>
+				</a>
+      </div>
+      <!--/#carousel-slider-->
+    </div>
+    <!--/#about-slider-->
+  </div>
+  <!--/#slider-->
+
+  <div class="about">
+    <div class="container">
+      <div class="text-center">
+        <h2>National Institute of Technology Calicut </h2>
+        <div class="col-md-10 col-md-offset-1">
+<!--          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat quod voluptate consequuntur ad quasi, dolores obcaecati ex aliquid, dolor provident accusamus omnis dolorum ipsam. Voluptatem ipsum expedita, corporis facilis laborum asperiores-->
+<!--            nostrum! Amet porro numquam ratione temporibus quia dolorem sint lorem voluptates quasi mollitia.</p>><!-->
+          <p>National Institute of Technology Calicut, formerly Regional Engineering College Calicut, is an autonomous, federally funded technical university and an institute of national importance governed by the NIT Act passed by the Parliament of India.</p>
+        </div>
+
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          <div class="btn-gamp"><a href="http://www.nitc.ac.in/">Learn More</a></div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+          <div class="gamp-btn"  ><a href="#">download</a></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <hr>
+
+  <div class="services">
+    <div class="container">
+      <div class="text-center">
+        <h2>NITC IS THE NEW NATIONAL CHAMPION </h2>
+      </div>
+      <div class="col-md-3 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
+        <i class="fa fa-heart-o"></i>
+        <h3>Placements Cell</h3>
+        <p> The placements for EEE students in National Institute of Technology are very good. The package offered to EEE students is Rs. 7.4 Lacs per annum and Rs. 10 Lacs per annum for computer science students.</p>
+      </div>
+      <div class="col-md-3 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+        <i class="fa fa-cloud"></i>
+        <h3>Wheather of calicut</h3>
+        <p>Looking at the weather in Calicut, India over the next 7 days, the maximum temperature will be 30℃ (or 87℉) on Sunday 20th October at around 11 am. In the same week the minimum temperature will be 24℃ (or 75℉) on Thursday 24th October at around 11 pm.</p>
+      </div>
+      <div class="col-md-3 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="900ms">
+        <i class="fa fa-book"></i>
+        <h3>Mission and Ambition</h3>
+        <p>To offer high quality graduate and post graduate programmes in the fields of Mechanical Engineering and to prepare students for professional career and higher studies promoting  excellence in teaching</p>
+      </div>
+      <div class="col-md-3 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="1200ms">
+        <i class="fa fa-gear"></i>
+        <h3>STUDENT'S CONDUCT AND DISCIPLINARY CODE</h3>
+        <p>National Institute of Technology Calicut affirms that the sole purpose of this Institute is to develop high quality technical personnel with a sound footing on basic engineering principles, technical skills, innovative research capabilities and exemplary professional
+</p>
+      </div>
+    </div>
+  </div>
+  <div class="gallery">
+    <div class="text-center">
+      <h2>Gallery</h2>
+      <p>Jan 11, 2019 - Virtual Tour. Faculty apartment. Chemical Engineering. Ladies Hostel. Main gate. Admin block new. Admin block old. IT complex. Department ... </p>
+    </div>
+
+    <div class="container">
+        {% for i in post %}
+      <div class="col-md-4">
+
+
+          <figcaption>
+            <h4>{{i.title}}</h4>
+            <p>{{i.content}}</p>
+            <p>{{i.date_posted|date:"M d, Y"}}</p>
+          </figcaption>
+
+      </div>
+     {% endfor %}
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="col-md-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
+        <h4>About Us</h4>
+        <p>National Institute of Technology Calicut (NIT Calicut or NITC), formerly Regional Engineering College Calicut, is an autonomous, federally funded technical university and an institute of national importance governed by the NIT Act passed by the Parliament of India.</p>
+        <div class="contact-info">
+          <ul>
+            <li><i class="fa fa-home fa"></i>Calicut Mukkam Road, Kattangal, Kerala 673601</li>
+            <li><i class="fa fa-phone fa"></i>7903241183</li>
+            <li><i class="fa fa-envelope fa"></i> rajupraaa1234@gmail.com</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+        <div class="text-center">
+          <h4>Photo Gallery</h4>
+          <ul class="sidebar-gallery">
+            <li><a href="#"><img src="{% static 'library/img/gallery1.png' %}" alt="" /></a></li>
+            <li><a href="#"><img src="{% static 'library/img/gallery2.png' %}" alt="" /></a></li>
+            <li><a href="#"><img src="{% static 'library/img/gallery3.png' %}" alt="" /></a></li>
+            <li><a href="#"><img src="{% static 'library/img/gallery4.png' %}" alt="" /></a></li>
+            <li><a href="#"><img src="{% static 'library/img/gallery5.png' %}" alt="" /></a></li>
+            <li><a href="#"><img src="{% static 'library/img/gallery6.png' %}" alt="" /></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-4 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="900ms">
+        <div class="">
+          <h4>New student Registration</h4>
+          <p>Join today to receive the latest Day news via email. You may unsubscribe from this service at any time</p>
+          <div class="btn-gamp">
+            <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Enter Email">
+          </div>
+          <div class="btn-gamp">
+            <a type="submit" class="btn btn-default">Subscribe</a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <div class="sub-footer">
+    <div class="container">
+      <div class="social-icon">
+        <div class="col-md-4">
+          <ul class="social-network">
+            <li><a href="https://facebook.com" class="fb tool-tip" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="https://twitter.com/" class="twitter tool-tip" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="https://www.google.com/" class="gplus tool-tip" title="Google Plus"><i class="fa fa-google-plus"></i></a></li>
+            <li><a href="https://in.linkedin.com/" class="linkedin tool-tip" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+            <li><a href="https://youtube.com" class="ytube tool-tip" title="You Tube"><i class="fa fa-youtube-play"></i></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-4 col-md-offset-4">
+        <div class="copyright">
+          &copy; Day Theme. All Rights Reserved.
+          <div class="credits">
+            <!--
+              All the links in the footer should remain intact.
+              You can delete the links only if you purchased the pro version.
+              Licensing information: https://bootstrapmade.com/license/
+              Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Day
+            -->
+            Designed by <a href="https://bootstrapmade.com/">NITC DEEN</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="{% static 'library/js/jquery.min.js' %}"></script>
+  <script src="{% static 'library/js/jquery-migrate.min.js' %}"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="{% static 'library/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'library/js/wow.min.js' %}"></script>
+  <script>
+    wow = new WOW({}).init();
+  </script>
+</body>
+
+</html>

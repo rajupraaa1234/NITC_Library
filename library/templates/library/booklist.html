@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+    <meta charset="UTF-8">
+    <link href="{% static 'library/login_popup.css' %}" rel="Stylesheet" type="text/css" />
+    <link href="{% static 'library/login_popup1.css' %}" rel="Stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Admin</title>
+</head>
+<body background="{% static 'library/img/wonder1.jpg' %}" style="background-repeat: no-repeat; background-size: cover; ">
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">NITC</a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+       <li class="nav-item">
+        <img src="{% static 'library/img/logonitc.jpg' %} "style="width:40px; hieght:40px;">
+      </li>
+      <li class="nav-item dropdown">
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <li class="nav-item">
+         <mark class="nav-link enabled" href="#" tabindex="2" aria-disabled="false" style="background-color: #80ced6;">Welcome Admin In NITC Library</mark>
+      </li>
+    </ul>
+      <form action="/booklist/" method="POST" class="form-inline my-2 my-lg-0">
+          {% csrf_token %}
+       <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Search By
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#" onclick="myFunction('tit')" name="title" value="tit" >Title</a>
+          <a class="dropdown-item" href="#" onclick="myFunction('auth')" name="author" value="aut">Author Name</a>
+          <a class="dropdown-item" href="#" onclick="myFunction('sub')" name="subject" value="sub">Subject</a>
+        </div>
+      </li>
+      <input type="text" name="result" id="demo" hidden>
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="searchbook">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <form class="form-inline my-2 my-lg-0" >
+         {% csrf_token %}
+<!--      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
+
+      <a href="{% url 'adminpage' %}" class="btn btn-outline-success my-2 my-sm-0"  style="margin:5px;">Admin Dashboard</a>
+      <a href="{% url 'verifyrequest' %}" class="btn btn-outline-success my-2 my-sm-0"  style="margin:5px;">Student Request</a>
+      <a href="{% url 'adminlogout' %}" class="btn btn-outline-success my-2 my-sm-0"  style="margin:5px;">Logout</a>
+    </form>
+  </div>
+</nav><br>
+ {% if note %}
+ <div class="alert alert-primary" role="alert">
+  {{note}}
+</div>
+{% endif %}
+{% if note1 %}
+<div class="p-3 mb-2 bg-danger text-white" role="alert">
+    Not Found This Type of Book Try Other....!!!!!
+</div>
+{% endif %}
+{% if obj %}
+     {% for i in obj %}
+<form method="POST" action="/returnbook/">
+    {% csrf_token %}
+<div class="col-sm-7">
+       <div class="card text-center">
+  <div class="card-header">
+      Subject : {{i.subject}}   (Book Id: {{i.bookid}})
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Title : {{i.title}}</h5>
+      <h5 class="card-title">Author : {{i.author}}</h5>
+      <input type="text" name="id" value="{{i.bookid}}" hidden>
+      <input type="text" name="author" value="{{i.author}}" hidden>
+      <input type="text" name="title" value="{{i.title}}" hidden>
+      <input type="text" name="subject" value="{{i.subject}}" hidden>
+      <input type="text" name="uname" value="{{user.username}}" hidden>
+       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a  href="#login_modal" value="{{i.bookid}}" onclick="fun('{{i.bookid}}')" class="btn btn-primary">Add Book</a>
+      <a  href="#login_modal1" value="{{i.bookid}}" onclick="fun1('{{i.bookid}}')" class="btn btn-danger">Remove Book</a>
+  </div>
+           <div class="card-footer text-muted">
+    Available Book : {{i.quantity}}
+  </div>
+
+</div>
+</div><br>
+</form>
+     {% endfor %}
+
+{% endif %}
+
+ <!--------------------------------------------- pop up -------------------------------------->
+ <div class="login_modal" id="login_modal">
+                    <div class="login_modal_container">
+                        <a href="" class="login_modal_close">&times</a>
+                        <form action="{% url 'removebynumber' %}" method="POST">
+                            {% csrf_token %}
+                            <font class="style42">Add Book</font><br>
+                            <h4>Enter Number of Book To be Add</h4>
+                            <input  type="number" class="textbox" name="num" placeholder="Number of book"/>
+                            Book Id &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" style="text-decoration: none;" name="bookids" id="bidr" readonly="readonly">
+
+
+                            <input type="submit" value="Add" class="bt" >
+                        </form>
+                    </div>
+                </div>
+				<script>
+
+					function fun(value)
+					{
+                           document.getElementById("bidr").value=value;
+					}
+				</script>
+ <!---------------------------------------------end pop up -------------------------------------->
+
+ <!---------------------------------------------Delete Book pop up -------------------------------------->
+ <div class="login_modal1" id="login_modal1">
+                    <div class="login_modal_container">
+                        <a href="" class="login_modal_close">&times</a>
+                        <form action="{% url 'deletebynumber' %}" method="POST">
+                            {% csrf_token %}
+                            <font class="style42">Remove Book</font><br>
+                            <h4>Enter Number of Book To be Delete</h4>
+                            <input id="number" type="number" class="textbox" name="numd" placeholder="Number of book"/>
+                            Book Id &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" style="text-decoration: none;" name="bookidd" id="bidrs" readonly="readonly">
+
+
+                            <input id="Button1" type="submit" value="Remove" class="bt" >
+                        </form>
+                    </div>
+                </div>
+				<script>
+
+					function fun1(value)
+					{
+                           document.getElementById("bidrs").value=value;
+					}
+				</script>
+ <!---------------------------------------------end pop up -------------------------------------->
+
+
+{% block content %}
+{% endblock %}
+
+<script>
+    function myFunction(value)
+    {
+          document.getElementById("demo").value = value;
+    }
+</script>
+</body>
+</html>
+
+
+
+
+
